@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/hellokvn/go-fiber-api/pkg/books"
 	"github.com/hellokvn/go-fiber-api/pkg/common/config"
 	"github.com/hellokvn/go-fiber-api/pkg/common/db"
 )
@@ -15,13 +16,14 @@ func main() {
 		log.Fatalln("Failed at config", err)
 	}
 
-	db.Init(c.DBUrl)
-
 	app := fiber.New()
+	db := db.Init(c.DBUrl)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World 👋!")
 	})
+
+	books.RegisterRoutes(app, db)
 
 	app.Listen(c.Port)
 }
