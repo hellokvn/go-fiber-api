@@ -16,5 +16,5 @@ func (h handler) DeleteBook(c *fiber.Ctx) error {
 
 	h.DB.Delete(&book)
 
-	return nil
+	return c.SendStatus(fiber.StatusOK)
 }

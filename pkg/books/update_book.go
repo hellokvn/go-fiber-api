@@ -32,5 +32,5 @@ func (h handler) UpdateBook(c *fiber.Ctx) error {
 
 	h.DB.Save(&book)
 
-	return c.JSON(&book)
+	return c.Status(fiber.StatusOK).JSON(&book)
 }

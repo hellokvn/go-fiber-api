@@ -12,5 +12,5 @@ func (h handler) GetBooks(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
 	}
 
-	return c.JSON(&books)
+	return c.Status(fiber.StatusOK).JSON(&books)
 }
