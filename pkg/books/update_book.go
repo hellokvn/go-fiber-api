@@ -30,6 +30,7 @@ func (h handler) UpdateBook(c *fiber.Ctx) error {
 	book.Author = body.Author
 	book.Description = body.Description
 
+	// save book
 	h.DB.Save(&book)
 
 	return c.Status(fiber.StatusOK).JSON(&book)

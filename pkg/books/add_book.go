@@ -14,6 +14,7 @@ type AddBookRequestBody struct {
 func (h handler) AddBook(c *fiber.Ctx) error {
 	body := AddBookRequestBody{}
 
+	// parse body, attach to AddBookRequestBody struct
 	if err := c.BodyParser(&body); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
@@ -24,6 +25,7 @@ func (h handler) AddBook(c *fiber.Ctx) error {
 	book.Author = body.Author
 	book.Description = body.Description
 
+	// insert new db entry
 	if result := h.DB.Create(&book); result.Error != nil {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
 	}

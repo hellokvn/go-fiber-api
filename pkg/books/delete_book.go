@@ -14,6 +14,7 @@ func (h handler) DeleteBook(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
 	}
 
+	// delete book from db
 	h.DB.Delete(&book)
 
 	return c.SendStatus(fiber.StatusOK)
