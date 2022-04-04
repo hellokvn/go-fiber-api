@@ -19,10 +19,6 @@ func main() {
 	app := fiber.New()
 	db := db.Init(c.DBUrl)
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World 👋!")
-	})
-
 	books.RegisterRoutes(app, db)
 
 	app.Listen(c.Port)
